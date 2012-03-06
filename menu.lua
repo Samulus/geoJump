@@ -1,17 +1,10 @@
 local gui = require("/lib/quickie")
 menu = gs.new()
 
-local opt = {"Exit","Load","Make"}
-local y   = {300,280,260}
-
 function menu:update(dt)
-	for i=1, #opt do 
-		if gui.Button(opt[i],300,y[i],130,20)  then
-			if opt[i] == "Exit" then love.quit() end
-	--  if opt[i] == "Load" then gs.switch(load) end
-			if opt[i] == "Make" then gs.switch(make) end
-		end
-	end
+	if gui.Button("Edit", 350, 310, 100, 20) then gs.switch(edit) end
+	if gui.Button("Load", 350, 330, 100, 20) then --[[TODO]] end
+	if gui.Button("Quit", 350, 350, 100, 20) then love.quit() end
 end
 
 function menu:draw()
