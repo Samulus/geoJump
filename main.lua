@@ -1,9 +1,8 @@
-gs = require ("lib/hump/gamestate")
+gs  = require ("lib/hump/gamestate")
 gui = require ("lib/quickie")
 
-require ("title")
-require ("menu")
-require ("edit")
+require "title"
+require "edit"
 
 function love.load()
 	fntA = love.graphics.newFont("gfx/fntA.ttf", 22)

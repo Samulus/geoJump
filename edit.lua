@@ -1,49 +1,54 @@
 edit = gs.new()
-local sU=30  -- snap every 30 px / units
-local sX=1   -- x snap axis
-local sY=1   -- y snap axis
-local vX={}  -- x vertices array
-local vY={}  -- x vertices array
-love.graphics.setPoint(6, "smooth")
+function edit:init()
+	love.graphics.setPoint(6, "smooth")
+	shape = {m = "rect", x = 400, y = 300}
+	mouse = {x = 0, y = 0}
+	verts = {x = {400}, y = {300}}
+	grid  = {u = 25, x = 0, y = 0}
+	slide = {value = 100, min = 0, max = 100}
+end
 
 function edit:update(dt)
 	local x,y = love.mouse.getPosition()
-	sX = math.floor(x/sU)
-	sY = math.floor(y/sU)
+	grid.x = math.floor(x/grid.u) * grid.u
+	grid.y = math.floor(y/grid.u) * grid.u
+	
+	if gui.Slider(slide,90,540,100,20) then end
+	if gui.Button("save",680,560,100,20) then 
+		gs.switch(save)
+	end
 end
 
 function edit:draw()
 	love.graphics.print("create a map", 50, 50)
-	-- border check
-	if sX*sU > 60 and sX*sU < 720 and
-	 	 sY*sU > 60 and sY*sU < 510
-		then love.graphics.point(sX*sU, sY*sU)
-	end 
-	
-	for i=1, #vX
-			do love.graphics.point(vX[i], vY[i])
-	end
-	
+	for i=1, #verts.x do
+		love.graphics.rectangle("fill",verts.x[i],verts.y[i],grid.u,grid.u)
+ end
 	gui.core.draw()
+	love.graphics.print("Tri", 195, 540)
+	love.graphics.print("Rect", 45, 540)
 end
 
 function edit:mousepressed(x,y,button)
-	if button == "l"
-		then table.insert(vX, sX*sU)
-				 table.insert(vY, sY*sU)
-	 else if button == "r"
-		then for i=1, #vX do
-				if vX[i] == sX*sU and vY[i] == sY*sU
-					then table.remove(vX, i)
-							 table.remove(vY, i)
-				end
-			end
+	if button == "l" then
+		if grid.y > 60 and grid.y < 500 then 
+			table.insert(verts.x, grid.x)
+			table.insert(verts.y, grid.y)
+		end
+	end
+	
+	if button == "r" then
+		for i=1, #verts.x do 
+			if verts.x[i] == grid.x and
+				 verts.y[i] == grid.y then
+			table.remove(verts.x, i)
+			table.remove(verts.y, i) end
 		end
 	end
 end
 
 function edit:keypressed(button)
 	if button == "escape" 
-		then gs.switch(menu) 
+		then gs.switch(title) 
 	end
 end
