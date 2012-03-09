@@ -1,6 +1,7 @@
 gs  = require "lib/hump/gamestate"
 hc  = require "lib/HardonCollider"
 gui = require "lib/quickie"
+inspect = require "lib/inspect/inspect"
 require "edit"
 require "save"
 
@@ -28,4 +29,3 @@ function main:draw()
 	love.graphics.print("geoJump", 500, 500)
 	gui.core.draw()
 end
-
