@@ -1,9 +1,11 @@
 save = gs.new()
+
 function save:enter()
 	if love.filesystem.isDirectory("lvls") == false then
 		love.filesystem.mkdir("lvls")
 	end
-	files = love.filesystem.enumerate("/")
+	
+	files = love.filesystem.enumerate("map/")
 end
 
 function save:init() 
@@ -16,11 +18,10 @@ function save:update()
 		level = love.filesystem.newFile("lvls/"..input.text)
 		level:open("w")
 	end
-	
 	j = 220
 	for i=1, #files do 
 		if gui.Button(files[i],550,j, 120, 20) then
-			love.filesystem.load(files[i])
+			love.filesystem.load("map/" .. files[i])
 		end
 		j = j + 20
 	end
@@ -29,7 +30,6 @@ end
 function save:draw() 
 	love.graphics.print("SAVE", 150, 180)
 	love.graphics.print("LOAD", 550, 180)
-
 	gui.core.draw()
 end
 

@@ -1,18 +1,18 @@
 gs  = require "lib/hump/gamestate"
 hc  = require "lib/HardonCollider"
 gui = require "lib/quickie"
-inspect = require "lib/inspect/inspect"
+require "lib/debug/debug"
 require "edit"
 require "save"
+require "tile"
 
-fnt  = love.graphics.setFont("gfx/fnt.ttf", 17)
-love.graphics.setPoint(6, "smooth")
-gs.registerEvents()
 main = gs.new()
+gs.registerEvents()
 gs.switch(main)
+love.graphics.setFont("gfx/fnt.ttf", 17)
 
 function main:update(dt)
-	if gui.Button("Edit", 340, 310, 100, 20) then 
+	if gui.Button("New", 340, 310, 100, 20) then 
 		gs.switch(edit)
 	end
 	
