@@ -19,7 +19,7 @@ end
 function main:update(dt)
 	if gui.Button("New", 340, 310, 100, 20) then 
 		if mapExists() == false then 
-			buildMap("lvl/empty.lua") end
+			buildMap("gfx/new.lua") end
 		gs.switch(edit)
 	end
 	

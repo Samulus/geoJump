@@ -8,8 +8,11 @@ function edit:update(dt)
 	local x,y = love.mouse.getPosition()
 	grid.x = math.floor(x/grid.u) * grid.u
 	grid.y = math.floor(y/grid.u) * grid.u
-	gui.Button("OK", 600, 560, 35, 20)
+	
 	gui.Input(save, 650, 560, 120, 20)
+	if gui.Button("OK", 600, 560, 35, 20) then
+		writeMap(save.text)
+	end
 end
 
 function edit:draw()
@@ -36,7 +39,6 @@ function edit:keypressed(key, code)
 	if key == "escape" then
 		gs.switch(main)
 	end
-
 	gui.core.keyboard.pressed(key, code)
 end
 

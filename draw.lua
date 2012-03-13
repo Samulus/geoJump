@@ -1,5 +1,5 @@
 -- draw.lua, drawing related functions
-local sheet, sprites, legend, mapVisual, mapTable;
+local sheet, sprites, legend, mapTable;
 function initTile()
 	sheet = love.graphics.newImage("gfx/tile.png")
 	sprites = {}
@@ -16,21 +16,14 @@ function initTile()
 end
 
 function buildMap(path)
-	mapVisual, mapTable = love.filesystem.load(path)()
-	local row, col = 1,1
-	for x=1, 20, 1 do mapTable[x] = {} end
-	
-	for block in mapVisual:gmatch("[^\n]+") do col=1
-    for char in block:gmatch(".") do
-      mapTable[col][row] = char; col=col+1
-    end row=row+1
-  end
+	local string = love.filesystem.load(path)()
+	mapTable = TSerial.unpack(string)
 end
 
 function editMap(mode, x, y)
 	local i,j = 1,1
-	while x ~= 64 do x=x-32 i=i+1 end
-	while y ~= 96 do y=y-32 j=j+1 end
+	while x ~= 64 do x=x-32; i=i+1 end
+	while y ~= 96 do y=y-32; j=j+1 end
 	
 	if mode == "insert" then 
 		mapTable[i][j] = '#' 
@@ -51,10 +44,14 @@ function drawMap()
 end
 
 function mapExists()
-	if mapVisual == nil or mapTable == nil then 
-		return false
-	
-	else 
-		return true
+	if mapTable == nil then 
+		return false 
 	end
+	
+	return true
+end
+
+-- helper functions for files outside draw.lua
+function getMap()
+	return mapTable;
 end
