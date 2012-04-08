@@ -1,27 +1,28 @@
-local state, hero, anim, font, map
-tl = require "lib/ATL/Loader"
-be = require "lib/beholder/beholder"
-hc = require "lib/HC"
+local hero, wrld, map, state
+  
+  inspect = require "lib/inspect/inspect"
+  
+  require "src/draw"
+  require "src/anim"
+  require "src/move"
+  require "src/wrld"
+  require "src/maps"
 
-require "src/animations"
-require "src/draw"
-require "src/init"
-require "src/maps"
+  function love.load()
+    hero = heroGet()
+    wrld = wrldGet()
+    map  = mapLoad("lvl/intro/vis.png", "lvl/title/col.png")
+  end
 
-function love.load()
-	state = "intro"
-	hero  = initHero()
-	anim  = initAnim() 
-	font  = initFont()
-	
-	map = tl.load("lvl/intro.tmx")
-	love.graphics.setBackgroundColor(226,226,226)
-	love.graphics.setColor(38,38,38)
-end
+  function love.update(dt)
+    movePlayer(hero, wrld, dt)
+    animUpdate(hero, dt)
+  end
 
-function love.draw()
-	if state == "intro" then
-		drawIntro(font)
-		return
-	end
-end
+  function love.draw()
+    drawWorld(map)
+    animDrawHero(hero)
+  end
+
+  function love.keypressed(key)
+  end
