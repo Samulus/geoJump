@@ -1,6 +1,7 @@
 local camera, vector, fnt
   
   love.graphics.setBackgroundColor(255,255,255)
+	love.graphics.setPointSize(5)
   love.graphics.setColor(36,36,36)
 	
 	fnt = {
@@ -14,16 +15,17 @@ local camera, vector, fnt
     love.graphics.print("geoJump", 150, 100)
   end
 
-  --[[function debugOverlay(hero, map)
+  function debugOverlay(hero, col, map)
     love.graphics.setFont(fnt.nrml)
     love.graphics.print("hero", 100, 95)
     love.graphics.print(inspect(hero), 100, 115)
+		love.graphics.print(inspect(col),  400, 115)
 
-		local r, g, b, a = map.geo:getPixel(hero.x, hero.y)
-		
-		if g == 255 then
-    	love.graphics.setFont(fnt.nrml)
-			love.graphics.print("door", hero.x, 450)
-		end
+		-- draw collision detection points --
+		love.graphics.point(col.forwd.x, col.forwd.y)
+		love.graphics.point(col.back.x, col.back.y)
+		love.graphics.point(col.top.x, col.top.y)
+		love.graphics.point(col.bottom.x, col.bottom.y)
+
+		love.graphics.line(hero.col.x, hero.col.y + 32, hero.col.x, hero.col.y + -32)
   end
-	--]]
