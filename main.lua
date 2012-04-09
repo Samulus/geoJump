@@ -1,4 +1,4 @@
-local hero, wrld, map, state
+local hero, wrld, col, map
   
   inspect = require "lib/inspect/inspect"
   
@@ -7,22 +7,24 @@ local hero, wrld, map, state
   require "src/move"
   require "src/wrld"
   require "src/maps"
+  require "src/coll"
 
   function love.load()
     hero = heroGet()
     wrld = wrldGet()
-    map  = mapLoad("lvl/intro/vis.png", "lvl/title/col.png")
+    col  =  colGet()
+    map  = mapLoad("lvl/intro/col.png", "lvl/intro/col.png")
   end
 
   function love.update(dt)
-    movePlayer(hero, wrld, dt)
+    movePlayer(hero, col, wrld, dt)
     animUpdate(hero, dt)
+    colUpdate(hero, col)
+    colDetect(hero, wrld, map, col)
   end
 
   function love.draw()
     drawWorld(map)
     animDrawHero(hero)
-  end
-
-  function love.keypressed(key)
+    debugOverlay(hero, col, map)
   end
