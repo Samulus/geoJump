@@ -1,62 +1,31 @@
+--[[ /'\_/`\                                                  /\ \__   
+    /\      \    ___   __  __     __    ___ ___      __    ___\ \ ,_\  
+    \ \ \__\ \  / __`\/\ \/\ \  /'__`\/' __` __`\  /'__`\/' _ `\ \ \/  
+     \ \ \_/\ \/\ \L\ \ \ \_/ |/\  __//\ \/\ \/\ \/\  __//\ \/\ \ \ \_ 
+      \ \_\\ \_\ \____/\ \___/ \ \____\ \_\ \_\ \_\ \____\ \_\ \_\ \__\
+       \/_/ \/_/\/___/  \/__/   \/____/\/_/\/_/\/_/\/____/\/_/\/_/\/__/ -]]
   
-  function movePlayer(hero,col,wrld, dt) 
-    if love.keyboard.isDown("right") and not col.fWall then
-      hero.x  = hero.x + (dt*400); 
-      hero.cd = "forwd"; 
-      hero.pd = "forwd"; 
-      hero.kp = true
-    end
-   
-     if love.keyboard.isDown("left") and not col.bWall then
-       hero.x = hero.x - (dt*400)
-       hero.cd = "back"; 
-       hero.pd = "back"; 
-       hero.kp = true
-    end
+  function moveForwd(hero, dt)
+     hero.x = hero.x + (dt*hero.mv)
+     hero.cd = "forwd"
+     hero.pd = "forwd"
+   end
 
-    if love.keyboard.isDown(" ") and hero.v == 0 then
-      hero.v = -hero.s; 
-      hero.j = true; 
-      hero.kp = true
-      love.timer.sleep(0.01)
-    end
-
-    if hero.kp == false then 
-      hero.cd = "idle"
-    else 
-      hero.kp = false 
-    end
-    
-    if col.roof then hero.v = col.top.y end
-    -- ^ cancel the players jump / velocity whenever player collides with roof
-    
-    if col.gnd  then wrld.gnd = col.bottom.y - 64 end
-    if not col.gnd then 
-      wrld.gnd = 800 
-      --hero.v = -hero.s 
-      hero.j = true
-    end
-    -- ^ set the ground level to col.bottom.y whenever player on ground
-    
+   function moveBack(hero, dt)
+     hero.x = hero.x - (dt*hero.mv)
+     hero.cd = "back"
+     hero.pd = "back"
+   end
+  
+   function moveParabola(hero, world, dt)
     if hero.v ~= 0 then
-      hero.v = hero.v + (dt*wrld.grv)
+      hero.v = hero.v + (dt*world.gv)
       hero.y = hero.y + (dt*hero.v)
-      hero.j = true
-       
-      if hero.pd == "back"  then 
-        hero.cd = "bJump" 
-      end
-       
-      if hero.pd == "forwd" then 
-        hero.cd = "fJump" 
-      end
-    
-    else hero.j = false 
-      return 
     end
 
-    if hero.y > wrld.gnd - hero.r then
-       hero.y = wrld.gnd - hero.r
-       hero.v = 0
-    end
+    if hero.y > world.gn - hero.h then
+       hero.y = world.gn - hero.h
+       hero.v = 0; 
+       hero.jm = false
+     end
   end
