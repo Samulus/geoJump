@@ -12,38 +12,31 @@
 	local title = {
 		vis = love.graphics.newImage("lvl/title/vis.png"),
 		col = love.image.newImageData("lvl/title/col.png"),
-		entry = {x=45,  y=59},
-		exit  = {x=194, y=508}
+		entry = {x=188, y=493},
+		exit  = {x=695, y=502}
 	}
 
 	local stairs = {
 		vis = love.graphics.newImage("lvl/stairs/vis.png"),
 		col = love.image.newImageData("lvl/stairs/col.png"),
-		entry = {x=45, y=59},
-		exit  = {x=75, y=96}
+		entry = {x=45,   y=59},
+		exit  = {x=742, y=368}
 	}
 
 	local gap = {
 		vis = love.graphics.newImage("lvl/gap/vis.png"),
 		col = love.image.newImageData("lvl/gap/col.png"),
 		entry = {x=45, y=500},
-		exit  = {x=194, y=508}
+		exit  = {x=50, y=237}
 	}
 
 	local style = {
 		vis = love.graphics.newImage("lvl/style/vis.png"),
 		col = love.image.newImageData("lvl/style/col.png"),
-		entry = {x=569,y=436},
-		exit  = {x=575, y=485}
+		entry = {x=574,y=408},
+		exit  = {x=27, y=435}
 	}
 	
-	--[[
-	local canvas = {
-		vis = love.graphics.newImage("lvl/canvas/vis.png"),
-		col = love.image.newImageData("lvl/canvas/col.png")
-	}
-	]]--
-
 	local rb = ringbuffer(title, stairs, gap, style)
 	
 	function mapGet() return rb end

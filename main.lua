@@ -8,7 +8,7 @@
      /\____/                                           \ \_\ 
      \_/__/         by Ashley, Cody, Emilo & Sam        \/_/ --]]
 
-  local hero, world, col, mapRing, map
+  local hero, world, debugMode, col, mapRing, map
   
   require "src/draw"
   require "src/anim"
@@ -24,6 +24,8 @@
     col     = colGet()
     mapRing = mapGet()
     map     = mapRing:get()
+
+		debugMode = false
   end
   
   function love.update(dt)
@@ -84,7 +86,10 @@
   function love.draw()
     drawWorld(map)
     animDrawHero(hero)
-    debugOverlay(hero, world, col, map)
+		
+		if debugMode then
+			debugOverlay(hero, world, col, map)
+		end
   end
 
   function love.keypressed(key)
@@ -99,4 +104,12 @@
 			map = mapRing:get()
       hero.x = map.exit.x; hero.y = map.exit.y
 		end
-  end
+
+		if key == "1" and not debugMode then
+			debugMode = true 
+			return end
+		
+		if key == "1" and debugMode then
+			debugMode = false
+			return end
+	end

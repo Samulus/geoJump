@@ -9,14 +9,12 @@
                                            \_/__/ --]]
 
   inspect  = require "lib/inspect/inspect"
-	local fntDebug = love.graphics.newFont("gfx/font/debug.ttf", 6)
+	local fntDebug = love.graphics.newFont("gfx/font/debug.ttf", 19)
 	
 	function debugOverlay(hero, world, col, map)
     love.graphics.setFont(fntDebug)
-    love.graphics.print("hero", 100, 95)
-    love.graphics.print(inspect(hero), 240, 400)
-    love.graphics.print(inspect(col),  340, 400)
-    love.graphics.print("ground level: ".. world.gn, 400, 400)
+    love.graphics.print(inspect(hero), 300, 200)
+    love.graphics.print(inspect(col),  450, 200)
 
     love.graphics.point(col.forwd.x, col.forwd.y)
     love.graphics.point(col.back.x, col.back.y)
