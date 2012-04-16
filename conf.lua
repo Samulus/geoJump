@@ -7,12 +7,12 @@
    \/____/\/___/  \/_/\/_/\/_/   \/_/\/___L\ \
                                        /\____/
                                        \_/__/  --]]
-  
   function love.conf(t)
     t.title = "geoJump"
     t.author = "Sam, Ashley, Emilo, Cody"
     t.identify = "geoJump"
-    t.screen.vsync = true
+    
+    t.screen.vsync = false
     t.modules.joystick = false
     t.modules.physics = false
   end

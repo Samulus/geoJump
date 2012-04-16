@@ -16,21 +16,22 @@
      r   = 5,       -- rate    
      v   = 250,     -- velocity    
      mv  = 400,     -- movement speed
-     js = 250,      -- jumpseed
-     jm = false,    -- boolean true or false jumped state
-      cd  = "forwd", -- current direction
-      pd  = "back",  -- previous direction
+     js  = 250,     -- jumpseed
+     jm  = false,   -- boolean true or false jumped state
+     cd  = "forwd", -- current direction
+     pd  = "back",  -- previous direction
+     dead = false   -- gets triggered if player collides with red square
   }
    
    world = {
      gn = 480, -- current ground level
-     gv = 450, -- current gravity level
-     jm = 500, -- current jumpspeed
+     gv = 500, -- current gravity level
+     jm = 300, -- current jumpspeed
    }
 
    col = {
       forwd  = {x = hero.x + 66, y = hero.y + 32},
-      back   = {x = hero.x - 2,  y = hero.y + 32},
+      back   = {x = hero.x     , y = hero.y + 32},
       top    = {x = hero.x + 32, y = hero.y -  2},
       bottom = {x = hero.x + 32, y = hero.y + 66},
 
@@ -39,8 +40,7 @@
       roof   = false, -- object above player
       gn     = false, -- ground level
       pDoor  = false, -- previous / entry door (yellow)
-      nDoor  = false, -- exit / next door (green)
-
+      nDoor  = false  -- exit / next door (green)
    }
   
   function heroGet()  return hero  end

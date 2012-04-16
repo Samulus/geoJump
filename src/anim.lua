@@ -6,7 +6,6 @@
         \ \_\ \_\ \_\ \_\ \_\ \_\ \_\ \_\ \__/.\_\\ \__\\ \_\ \____/\ \_\ \_\/\____/
          \/_/\/_/\/_/\/_/\/_/\/_/\/_/\/_/\/__/\/_/ \/__/ \/_/\/___/  \/_/\/_/\/___/  --]]
 
-
   local grd, img, idle, back, forwd, jump
   local anim8 = require "lib/anim8/anim8"
 
@@ -43,6 +42,6 @@
     if hero.cd == "fJump" then fJump:draw(img.fJump, hero.x, hero.y) return end
     if hero.cd == "bJump" then bJump:draw(img.bJump, hero.x, hero.y) return end
     if hero.cd == "forwd" then forwd:draw(img.forwd, hero.x, hero.y) return end
-    if hero.cd == "back"  then   back:draw(img.back, hero.x, hero.y) return end
-    if hero.cd == "idle"  then   idle:draw(img.idle, hero.x, hero.y) return end
+    if hero.cd == "back"  then back:draw(img.back, hero.x, hero.y)   return end
+    if hero.cd == "idle"  then idle:draw(img.idle, hero.x, hero.y)   return end
   end
